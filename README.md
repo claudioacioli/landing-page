@@ -1,13 +1,23 @@
 # Landing Page Project
+This is a Udacity's project, Front End Nanodegree
 
-## Table of Contents
+## Online
 
-* [Instructions](#instructions)
+To view this site online please click below:
 
-## Instructions
+* [https://claudioacioli.github.io/landing-page](https://claudioacioli.github.io/landing-page/)
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## Local Machine
 
-To get started, open `js/app.js` and start building out the app's functionality
+To view this code in your machine:
 
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
+* Clone this repository
+```
+git clone https://github.com/claudioacioli/landing-page.git
+```
+
+## To run in your machine
+
+There is a several ways to run on your machine. Let's see some options:
+
+* Use [Web Server for Chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb)
