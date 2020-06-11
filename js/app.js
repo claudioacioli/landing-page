@@ -31,6 +31,13 @@ document.addEventListener("DOMContentLoaded", e => {
 * 
 */
 
+
+/**
+ * End Helper Functions
+ * Begin Main Functions
+ * 
+*/
+
   const 
 
     renderNavLink = ({href, text}) => {
@@ -59,14 +66,6 @@ document.addEventListener("DOMContentLoaded", e => {
       navBarElement.appendChild(fragment);
     }
   ;
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
-// build the nav
 
 
 // Add class 'active' to section when near top of viewport
