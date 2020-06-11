@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", e => {
   ;
 
   const
+
     handleMenuClick = e => {
       e.preventDefault();
       const element = e.target;
@@ -80,7 +81,7 @@ document.addEventListener("DOMContentLoaded", e => {
         goTo(path);
       }
 
-    }
+    },
 
     handleRouteChange = () => {
       const route = getRoute();
@@ -89,8 +90,11 @@ document.addEventListener("DOMContentLoaded", e => {
 
       activeRoute = route;
       const element = byId(route);
-      if(element)
+      
+      if(element) {
+        menuActive.toggle(byId(element.dataset.menu));
         scrollToElement(element);
+      }
     }
   ;
 
@@ -102,10 +106,11 @@ document.addEventListener("DOMContentLoaded", e => {
 
   const 
 
-    renderMenuLink = ({href, text}) => {
+    renderMenuLink = ({id, href, text}) => {
       const element = document.createElement("a");
       element.classList.add("menu__link");
       element.setAttribute("href", href);
+      element.setAttribute("id", id);
       element.textContent = text;
       return element;
     },
@@ -118,13 +123,17 @@ document.addEventListener("DOMContentLoaded", e => {
 
     renderMenu = () => {
       const fragment = document.createDocumentFragment();
-      for(element of sectionElements)
+      for(element of sectionElements){
+        const id = element.id.toString().trim().replace("section", "menu");
+        element.dataset.menu = id;
         fragment.appendChild(
           renderMenuItem({
+            id,
             "href": `#${element.id}`,
             "text": element.dataset.nav
           })
         );
+      }
       menuElement.appendChild(fragment);
     }
   ;
