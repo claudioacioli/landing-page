@@ -19,7 +19,7 @@ class ActiveElement {
 
     this._set = function(element) {
       if(!element)
-        throw new Error("element need to be a DOMElement");
+        return;
 
       this._element = element;
       this._element.classList.add(this._className);
@@ -28,6 +28,7 @@ class ActiveElement {
     this._unset = function() {
       if(this._element)
         this._element.classList.remove(this._className);
+      
       this._element = null;
     };
 
