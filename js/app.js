@@ -39,12 +39,29 @@ document.addEventListener("DOMContentLoaded", e => {
 */
 
   const
+
+    sanitizePath = path =>
+      path
+        .replace(/\/$/, "")
+        .replace(/^\//, "")
+        .replace(/^#/, "")
+    ,
+
+    goTo = (route) => {
+      window.history.pushState(null, null, "/" + route);
+    }
+
+  ;
+
+  const
     handleMenuClick = e => {
       e.preventDefault();
       const element = e.target;
 
       if(element.nodeName.toLowerCase().trim() === "a") {
+        const path = sanitizePath(element.getAttribute("href"));
         menuActive.toggle(element);
+        goTo(path);
       }
 
     }
