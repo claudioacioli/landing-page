@@ -21,3 +21,13 @@ git clone https://github.com/claudioacioli/landing-page.git
 There is a several ways to run on your machine. Let's see some options:
 
 * Use [Web Server for Chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb)
+* Use python
+```
+$ cd landing-page
+$ python3 -m http.server
+```
+* Use php
+```
+$ cd landing-page
+$ php -S localhost:8080
+```
