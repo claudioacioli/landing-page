@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", e => {
 */
 
   const
-    handleClickMenu = e => {
+    handleMenuClick = e => {
       e.preventDefault();
       const element = e.target;
 
@@ -74,14 +74,13 @@ document.addEventListener("DOMContentLoaded", e => {
 
     renderMenu = () => {
       const fragment = document.createDocumentFragment();
-      sectionElements.forEach(element =>
+      for(element of sectionElements)
         fragment.appendChild(
           renderMenuItem({
             "href": `#${element.id}`,
             "text": element.dataset.nav
           })
-        )
-      );
+        );
       menuElement.appendChild(fragment);
     }
   ;
@@ -103,6 +102,6 @@ document.addEventListener("DOMContentLoaded", e => {
   renderMenu();
 // Scroll to section on link click
 // Set sections as active
-  menuElement.addEventListener("click", handleClickMenu);
+  menuElement.addEventListener("click", handleMenuClick);
 
 });
