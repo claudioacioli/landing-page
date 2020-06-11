@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", e => {
     sectionElements = byAll("main section"),
 // helpers
     menuActive = new ActiveElement(CLASSNAME_ACTIVE),
+    sectionActive = new ActiveElement(CLASSNAME_ACTIVE),
 
 /**
 * End Global Variables
@@ -62,6 +63,27 @@ document.addEventListener("DOMContentLoaded", e => {
       window.scrollX + element.getBoundingClientRect().left
     ,
 
+    isElementInViewport = element => {
+      let 
+        top = element.offsetTop,
+        left = element.offsetLeft,
+        width = element.offsetWidth,
+        height = element.offsetHeight
+      ;
+
+      while(element.offsetParent) {
+        element = element.offsetParent;
+        top += element.offsetTop;
+        left += element.offsetLeft;
+      }
+
+      return (
+        top >= window.pageYOffset &&
+        left >= window.pageXOffset &&
+        (top + height) <= (window.pageYOffset + window.innerHeight) &&
+        (left + width) <= (window.pageXOffset + window.innerWidth)
+      );
+    },
     scrollToElement = element => {
       const from = window.scrollY;
       const to = getPositionY(element);
@@ -100,6 +122,16 @@ document.addEventListener("DOMContentLoaded", e => {
       if(element) {
         menuActive.toggle(byId(element.dataset.menu));
         scrollToElement(element);
+      }
+    },
+
+    handleScroll = e => {
+      for(element of sectionElements) {
+        if(isElementInViewport(element)) {
+          menuActive.toggle(byId(element.dataset.menu));
+          sectionActive.toggle(element);
+          return;
+        }
       }
     },
 
@@ -159,6 +191,7 @@ document.addEventListener("DOMContentLoaded", e => {
 // Scroll to section on link click
 // Set sections as active
   menuElement.addEventListener("click", handleMenuClick);
+  window.addEventListener("scroll", handleScroll);
 
   setInterval(handleRouteChange, 50);
 
