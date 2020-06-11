@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", e => {
 
     renderMenuLink = ({href, text}) => {
       const element = document.createElement("a");
+      element.classList.add("menu__link");
       element.setAttribute("href", href);
       element.textContent = text;
       return element;
