@@ -62,9 +62,20 @@ document.addEventListener("DOMContentLoaded", e => {
       window.scrollX + element.getBoundingClientRect().left
     ,
 
-    scrollToElement = element =>
-      scrollTo(0, getPositionY(element))
-    ,
+    scrollToElement = element => {
+      const from = window.scrollY;
+      const to = getPositionY(element);
+      const value = from <= to ? from + 50 : from - 50;
+
+      if(Math.abs(from - to) < 50)
+        return;
+
+      window.scrollTo(0, value);
+      requestAnimationFrame(() => {
+        scrollToElement(element);
+      });
+
+    },
 
     handleMenuClick = e => {
       e.preventDefault();
