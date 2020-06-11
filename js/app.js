@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", e => {
 */
 
   const 
-    navBarElement = byId("navbar__list"),
+    menuElement = byId("navbar__list"),
     sectionElements = byAll("main section")
   ;
 
@@ -40,30 +40,30 @@ document.addEventListener("DOMContentLoaded", e => {
 
   const 
 
-    renderNavLink = ({href, text}) => {
+    renderMenuLink = ({href, text}) => {
       const element = document.createElement("a");
       element.setAttribute("href", href);
       element.textContent = text;
       return element;
     },
 
-    renderNavItem = attr => {
+    renderMenuItem = attr => {
       const element = document.createElement("li");
-      element.appendChild(renderNavLink(attr));
+      element.appendChild(renderMenuLink(attr));
       return element;
     },
 
-    renderNavBar = () => {
+    renderMenu = () => {
       const fragment = document.createDocumentFragment();
       sectionElements.forEach(element =>
         fragment.appendChild(
-          renderNavItem({
+          renderMenuItem({
             "href": `#${element.id}`,
             "text": element.dataset.nav
           })
         )
       );
-      navBarElement.appendChild(fragment);
+      menuElement.appendChild(fragment);
     }
   ;
 
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", e => {
 
 // Build menu 
   
-  renderNavBar();
+  renderMenu();
 
 // Scroll to section on link click
 
