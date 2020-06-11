@@ -68,10 +68,14 @@ section {
     padding-left: 0;
     margin: 0;
     text-align: right;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .navbar__menu li {
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
 .navbar__menu .menu__link {
@@ -88,10 +92,11 @@ section {
     transition: ease 0.3s all;
 }
 
-.menu__link.is-active {
-  background: red;
-  color: yellow;
-  transition: erase 0.3s all;
+.menu__link.is-active,
+.menu__link:hover.is-active {
+  background: #555;
+  color: white;
+  transition: ease 1.5s all;
 }
 
 /* Header Styles */
