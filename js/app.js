@@ -5,7 +5,9 @@
  * scrolls to anchors from navigation,
  * and highlights section in viewport upon scrolling.
  * 
- * Dependencies: None
+ * Dependencies: 
+ *  by.js 
+ *  AcitveElement.js
  * 
  * JS Version: ES2015/ES6
  * 
@@ -20,9 +22,14 @@ document.addEventListener("DOMContentLoaded", e => {
 * 
 */
 
-  const 
+  const  
+// constants
+    CLASSNAME_ACTIVE = "is-active",
+// DOMElements
     menuElement = byId("navbar__list"),
-    sectionElements = byAll("main section")
+    sectionElements = byAll("main section"),
+// helpers
+    menuActive = new ActiveElement(CLASSNAME_ACTIVE)
   ;
 
 /**
@@ -31,6 +38,17 @@ document.addEventListener("DOMContentLoaded", e => {
 * 
 */
 
+  const
+    handleClickMenu = e => {
+      e.preventDefault();
+      const element = e.target;
+
+      if(element.nodeName.toLowerCase().trim() === "a") {
+        menuActive.toggle(element);
+      }
+
+    }
+  ;
 
 /**
  * End Helper Functions
@@ -82,11 +100,9 @@ document.addEventListener("DOMContentLoaded", e => {
 */
 
 // Build menu 
-  
   renderMenu();
-
 // Scroll to section on link click
-
 // Set sections as active
+  menuElement.addEventListener("click", handleClickMenu);
 
 });
