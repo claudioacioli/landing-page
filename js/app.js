@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", e => {
     menuActive = new ActiveElement(CLASSNAME_ACTIVE)
   ;
 
+  let activeRoute = null;
+
 /**
 * End Global Variables
 * Start Helper Functions
@@ -47,10 +49,24 @@ document.addEventListener("DOMContentLoaded", e => {
         .replace(/^#/, "")
     ,
 
-    goTo = (route) => {
-      window.history.pushState(null, null, "/" + route);
-    }
+    goTo = (route) =>
+      window.history.pushState(null, null, "/" + route)
+    ,
 
+    getRoute = () =>
+      sanitizePath(decodeURI(window.location.pathname + window.location.search))
+    ,
+
+    getPositionY = element => 
+      window.scrollY + element.getBoundingClientRect().top - menuElement.offsetHeight
+    ,
+
+    getPositionX = element => 
+      window.scrollX + element.getBoundingClientRect().left
+    ,
+
+    scrollToElement = element =>
+      scrollTo(0, getPositionY(element))
   ;
 
   const
@@ -64,6 +80,17 @@ document.addEventListener("DOMContentLoaded", e => {
         goTo(path);
       }
 
+    }
+
+    handleRouteChange = () => {
+      const route = getRoute();
+      if(activeRoute === route)
+        return;
+
+      activeRoute = route;
+      const element = byId(route);
+      if(element)
+        scrollToElement(element);
     }
   ;
 
@@ -120,5 +147,7 @@ document.addEventListener("DOMContentLoaded", e => {
 // Scroll to section on link click
 // Set sections as active
   menuElement.addEventListener("click", handleMenuClick);
+
+  setInterval(handleRouteChange, 50);
 
 });
