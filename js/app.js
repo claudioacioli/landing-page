@@ -22,7 +22,10 @@ document.addEventListener("DOMContentLoaded", e => {
 * 
 */
 
-  let activeRoute = null;
+  let 
+    activeRoute = null,
+    isScrolling = false
+  ;
   
   const  
 // constants
@@ -113,7 +116,7 @@ document.addEventListener("DOMContentLoaded", e => {
 
     handleRouteChange = () => {
       const route = getRoute();
-      if(activeRoute === route)
+      if(activeRoute === route || isScrolling)
         return;
 
       activeRoute = route;
@@ -130,6 +133,9 @@ document.addEventListener("DOMContentLoaded", e => {
         if(isElementInViewport(element)) {
           menuActive.toggle(byId(element.dataset.menu));
           sectionActive.toggle(element);
+          isScrolling = true;
+          goTo(element.id);
+          isScrolling = false;
           return;
         }
       }
