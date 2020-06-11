@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", e => {
 * 
 */
 
+  let activeRoute = null;
+  
   const  
 // constants
     CLASSNAME_ACTIVE = "is-active",
@@ -29,18 +31,13 @@ document.addEventListener("DOMContentLoaded", e => {
     menuElement = byId("navbar__list"),
     sectionElements = byAll("main section"),
 // helpers
-    menuActive = new ActiveElement(CLASSNAME_ACTIVE)
-  ;
-
-  let activeRoute = null;
+    menuActive = new ActiveElement(CLASSNAME_ACTIVE),
 
 /**
 * End Global Variables
 * Start Helper Functions
 * 
 */
-
-  const
 
     sanitizePath = path =>
       path
@@ -67,9 +64,7 @@ document.addEventListener("DOMContentLoaded", e => {
 
     scrollToElement = element =>
       scrollTo(0, getPositionY(element))
-  ;
-
-  const
+    ,
 
     handleMenuClick = e => {
       e.preventDefault();
@@ -95,16 +90,13 @@ document.addEventListener("DOMContentLoaded", e => {
         menuActive.toggle(byId(element.dataset.menu));
         scrollToElement(element);
       }
-    }
-  ;
+    },
 
 /**
  * End Helper Functions
  * Begin Main Functions
  * 
-*/
-
-  const 
+*/ 
 
     renderMenuLink = ({id, href, text}) => {
       const element = document.createElement("a");
