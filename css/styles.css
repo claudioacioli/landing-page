@@ -94,9 +94,9 @@ section {
 
 .menu__link.is-active,
 .menu__link:hover.is-active {
-  background: #555;
-  color: white;
-  transition: ease 1.5s all;
+    background: #555;
+    color: white;
+    transition: ease 1.5s all;
 }
 
 /* Header Styles */
