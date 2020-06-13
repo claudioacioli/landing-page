@@ -50,14 +50,6 @@ document.addEventListener("DOMContentLoaded", e => {
         .replace(/^#/, "")
     ,
 
-    goTo = (route) =>
-      window.history.pushState(null, null, "/" + route)
-    ,
-
-    getRoute = () =>
-      sanitizePath(decodeURI(window.location.pathname + window.location.search))
-    ,
-
     getPositionY = element => 
       window.scrollY + element.getBoundingClientRect().top - menuElement.offsetHeight
     ,
@@ -87,6 +79,7 @@ document.addEventListener("DOMContentLoaded", e => {
         (left + width) <= (window.pageXOffset + window.innerWidth)
       );
     },
+
     scrollToElement = element => {
       const from = window.scrollY;
       const to = getPositionY(element);
@@ -107,25 +100,11 @@ document.addEventListener("DOMContentLoaded", e => {
       const element = e.target;
 
       if(element.nodeName.toLowerCase().trim() === "a") {
-        const path = sanitizePath(element.getAttribute("href"));
+        const sectionElement = byId(element.getAttribute("href").substr(1));
         menuActive.toggle(element);
-        goTo(path);
+        scrollToElement(sectionElement);
       }
 
-    },
-
-    handleRouteChange = () => {
-      const route = getRoute();
-      if(activeRoute === route || isScrolling)
-        return;
-
-      activeRoute = route;
-      const element = byId(route);
-      
-      if(element) {
-        menuActive.toggle(byId(element.dataset.menu));
-        scrollToElement(element);
-      }
     },
 
     handleScroll = e => {
@@ -133,9 +112,6 @@ document.addEventListener("DOMContentLoaded", e => {
         if(isElementInViewport(element)) {
           menuActive.toggle(byId(element.dataset.menu));
           sectionActive.toggle(element);
-          isScrolling = true;
-          goTo(element.id);
-          isScrolling = false;
           return;
         }
       }
@@ -179,17 +155,8 @@ document.addEventListener("DOMContentLoaded", e => {
     }
   ;
 
-
-// Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
-
-
 /**
  * End Main Functions
- * Begin Events
- * 
 */
 
 // Build menu 
@@ -198,7 +165,5 @@ document.addEventListener("DOMContentLoaded", e => {
 // Set sections as active
   menuElement.addEventListener("click", handleMenuClick);
   window.addEventListener("scroll", handleScroll);
-
-  setInterval(handleRouteChange, 50);
 
 });
