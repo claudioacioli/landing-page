@@ -95,6 +95,15 @@ document.addEventListener("DOMContentLoaded", e => {
 
     },
 
+    activeElementInViewport = () => { 
+      for(element of sectionElements) 
+        if(isElementInViewport(element)) {
+          menuActive.toggle(byId(element.dataset.menu));
+          sectionActive.toggle(element);
+          return;
+        }
+    },
+
     handleMenuClick = e => {
       e.preventDefault();
       const element = e.target;
@@ -108,13 +117,7 @@ document.addEventListener("DOMContentLoaded", e => {
     },
 
     handleScroll = e => {
-      for(element of sectionElements) {
-        if(isElementInViewport(element)) {
-          menuActive.toggle(byId(element.dataset.menu));
-          sectionActive.toggle(element);
-          return;
-        }
-      }
+      activeElementInViewport();
     },
 
 /**
@@ -162,8 +165,8 @@ document.addEventListener("DOMContentLoaded", e => {
 // Build menu 
   renderMenu();
 // Scroll to section on link click
-// Set sections as active
   menuElement.addEventListener("click", handleMenuClick);
   window.addEventListener("scroll", handleScroll);
-
+// Set sections as active
+  activeElementInViewport();
 });
